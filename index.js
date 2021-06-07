@@ -23,6 +23,17 @@ function renderRepos(repos) {
   repos.forEach(
     ({ full_name: fullName, open_issues_count: openIssuesCount }) => {
       const li = document.createElement('li');
+      const a = document.createElement('a');
+      const fullNameSpan = document.createElement('span');
+      const issuesSpan = renderOpenIssues(openIssuesCount);
+
+      a.href = `./issues.html?repo=${fullName}`;
+
+      fullNameSpan.innerText = fullName;
+
+      a.appendChild(fullNameSpan);
+      a.appendChild(issuesSpan);
+
       li.classList.add(
         'list-item',
         'flex-row',
@@ -30,12 +41,7 @@ function renderRepos(repos) {
         'align-center',
       );
 
-      const fullNameSpan = document.createElement('span');
-      fullNameSpan.innerText = fullName;
-
-      const issuesSpan = renderOpenIssues(openIssuesCount);
-      li.appendChild(fullNameSpan);
-      li.appendChild(issuesSpan);
+      li.appendChild(a);
       reposContainer.appendChild(li);
     },
   );
