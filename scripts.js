@@ -56,3 +56,16 @@ document.querySelector('form').addEventListener('submit', event => {
       renderRepos(repoResults);
     });
 });
+
+document.querySelector('#language-buttons').addEventListener('click', event => {
+  const { language } = event.target.dataset;
+
+  fetch(
+    `${BASE_URL}/search/repositories?q=${language}+is:featured&sort=help-wanted-issues`,
+  )
+    .then(resp => resp.json())
+    .then(({ items }) => {
+      renderSearchTerm(language);
+      renderRepos(items);
+    });
+});
