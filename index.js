@@ -22,24 +22,20 @@ function renderOpenIssues(numOfIssues) {
 function renderRepos(repos) {
   repos.forEach(
     ({ full_name: fullName, open_issues_count: openIssuesCount }) => {
-      const li = document.createElement('li');
       const a = document.createElement('a');
       const fullNameSpan = document.createElement('span');
       const issuesSpan = renderOpenIssues(openIssuesCount);
+      const li = document.createElement('li');
 
       a.href = `./issues.html?repo=${fullName}`;
+      a.classList.add('flex-row', 'justify-space-between', 'align-center');
 
       fullNameSpan.innerText = fullName;
 
       a.appendChild(fullNameSpan);
       a.appendChild(issuesSpan);
 
-      li.classList.add(
-        'list-item',
-        'flex-row',
-        'justify-space-between',
-        'align-center',
-      );
+      li.classList.add('list-item');
 
       li.appendChild(a);
       reposContainer.appendChild(li);
